@@ -43,7 +43,9 @@ final class NetServiceTransport: NSObject {
         self.serviceBrowser = NetServiceBrowser()
         let config = URLSessionConfiguration.default
         #if os(iOS)
-        config.waitsForConnectivity = true
+        if #available(iOS 11.0, *) {
+            config.waitsForConnectivity = true
+        }
         #endif
         session = URLSession(configuration: config)
         super.init()
